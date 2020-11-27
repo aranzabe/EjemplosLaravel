@@ -10,8 +10,8 @@
         
         <form action="validar" method="POST" name="formulario">
             {!! csrf_field(); !!}
-            <input type="text" name="nombre[]" value="" placeholder="Escribe...."><br>
-            <input type="text" name="nombre[]" value="" placeholder="Escribe...."><br>
+            <input type="text" name="nombre" value="" placeholder="Escribe...."><br>
+            <input type="text" name="nombre" value="" placeholder="Escribe...."><br>
             <input type="number" name="num[]" value="0"><br>
             <input type="number" name="num[]" value="0"><br>
             <input type="number" name="num[]" value="0"><br>
