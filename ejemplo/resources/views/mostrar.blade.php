@@ -19,7 +19,7 @@
             echo 'Id de la sesión: ' . session()->getId() . '<br>';
             echo 'Borrando todas...' . '<br>';
             //session()->regenerate();
-            session()->flush();
+            //session()->flush();
             echo 'Id de la sesión: ' . session()->getId() . '<br>';
             if (!session()->has('ses')){
                 echo 'ses ya no existe'.'<br>';
@@ -29,9 +29,14 @@
         <?php
         var_dump($nombre);
         var_dump($numero);
-        foreach ($numero as $n) {
-            echo ($n + 10) . '<br>';
-        }
+        var_dump($objeto);
+        echo $objeto;
+        $ob = session()->get('obj');
+        $ob->setEdad(45);
+        echo $ob;
+//        foreach ($numero as $n) {
+//            echo ($n + 10) . '<br>';
+//        }
         ?><br>
 
         <a href="indice">Volver</a>
