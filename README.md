@@ -5,3 +5,6 @@ Tendremos que regenerar la key el proyecto con:
 cp .env.example .env           
 
 php artisan key:generate
+
+Finalmente, si estás en Linux, otorga todos los permisos a toda la carpeta del proyecto: chmod 777 -R ejemploXXX
+
