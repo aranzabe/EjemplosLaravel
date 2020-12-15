@@ -13,15 +13,15 @@ class micontrol extends Controller {
         //b) Usando un parámetro con nombre.
         //$personas = \DB::select('select * from personas where DNI = :dn', ['dn' => '2B']);
         //c) Consulta de varias tablas.
-        // $quer = 'select * from personas, propiedades, coches'
-        //  . ' where propiedades.DNI = personas.DNI '
-        //  . 'AND propiedades.Matricula = coches.Matricula';
-        //dd($quer);
-        //$personas = \DB::select($quer);
+//         $quer = 'select * from personas, propiedades, coches'
+//          . ' where propiedades.DNI = personas.DNI '
+//          . 'AND propiedades.Matricula = coches.Matricula And personas.DNI = ?';
+//        //dd($quer);
+//        $personas = \DB::select($quer,['1A']);
         /*
          * Otros ejemplos sin QB:
          */
-        //\DB::insert('insert into personas (DNI, nombre, Tfno, edad) values (?, ?, ?, ?)', ['19J', 'Ana', '1234', 36]);
+        //\DB::insert('insert into personas (DNI, Nombre, Tfno, edad) values (?, ?, ?, ?)', ['195J', 'Daniel', '1234', 36]);
         /* $afectadas = \DB::update('update personas set Tfno = '100' where DNI = ?', ['3C'])
          * $borradas = \DB::delete('delete from personas');
          */
@@ -34,41 +34,34 @@ class micontrol extends Controller {
         //a) El equivalente de una select *.
         //$personas = \DB::table('personas')->get();
         //b) Select con condiciones
-        /* $personas = \DB::table('personas')
-          ->select('DNI', 'Nombre', 'Tfno', 'edad')
-          ->where('DNI', '=', '3C')
-          ->orderBy('edad', 'desc')
-          ->get();
-         */
+//         $personas = \DB::table('personas')
+//          ->select('DNI', 'Nombre', 'Tfno', 'edad')
+//          ->where('DNI', '=', '3C')
+//          ->orderBy('edad', 'desc')
+//          ->get();
         //c) Selección con opciones AND y OR
-        /* $personas = \DB::table('personas')
-          ->select('DNI','Nombre','edad')
-          ->where('edad','>=','30')
-          ->where('edad','<=','35')
-          ->orwhere('nombre','Groucho')
-          ->orderBy('edad','desc')
-          ->get();
-         * */
+//         $personas = \DB::table('personas')
+//          ->select('DNI','Nombre','edad')
+//          ->where('edad','>=','30')
+//          ->where('edad','<=','35')
+//          ->orwhere('nombre','Groucho')
+//          ->orderBy('edad','desc')
+//          ->get();
         //d) Selección haciendo join de varias tablas.
-         $personas = \DB::table('personas')
-          ->join('propiedades','propiedades.DNI','=','personas.DNI')
-          ->join('coches','coches.Matricula','=','propiedades.Matricula')
-          ->select('personas.DNI','Nombre','edad','Marca','Modelo')
-          ->get();
-         
-        //var_dump($personas);
-        ///Otras opciones con QB:
-        /*
-          \DB::table('personas')->insert(
-          ['DNI' => '20T', 'Nombre' => 'Pepe', Tfno => '435', edad => 36]
-          );
-         */
-        /*
-          \DB::table('personas')
-          ->where('DNI', '1A')
-          ->update(['Tfno' => '123']);
-         * */
+        $personas = \DB::table('personas')
+                ->join('propiedades', 'propiedades.DNI', '=', 'personas.DNI')
+                ->join('coches', 'coches.Matricula', '=', 'propiedades.Matricula')
+                ->select('personas.DNI', 'Nombre', 'edad', 'Marca', 'Modelo')
+                ->get();
 
+//        var_dump($personas);
+        ///Otras opciones con QB:
+//          \DB::table('personas')->insert(
+//          ['DNI' => '20T', 'Nombre' => 'Pepe', Tfno => '435', edad => 36]
+//          );
+//          \DB::table('personas')
+//          ->where('DNI', '1A')
+//          ->update(['Tfno' => '123']);
         //\DB::table('personas')->where('edad', '<', 18)->delete();
         //\DB::table('personas')->truncate();
 
@@ -81,18 +74,50 @@ class micontrol extends Controller {
         return view('listado', $datos);
     }
 
+    public function servicioWEBdatos(Request $req) {
+        if ($req->has('dni')) {
+            $dn = $req->get('dni');
+            //$no = $req->get('nombre');
+            $personas = \DB::select('select * from personas where DNI = ?', [$dn]);
+            echo json_encode($personas);
+        } else {
+            $personas = \DB::table('personas')->get();
+            //echo json_encode($personas);
+            return response()->json($personas);
+        }
+    }
+
+    public function servicioWEBdatosRuta($dni) {
+        $personas = \DB::select('select * from personas where DNI = ?', [$dni]);
+        echo json_encode($personas);
+    }
+
+    public function servicioWEB() {
+//        $datos = [['num' => 1, 'texto' => "Laravel uno"],
+//            ['num' => 2, 'texto' => "Laravel dos"],
+//            ['num' => 3, 'texto' => "Laravel tres"],
+//            ['num' => 4, 'texto' => "Laravel cuatro"]
+//        ];
+        //header("HTTP/1.1 200 OK");
+        $personas = \DB::table('personas')->get();
+//        $datos = [
+//            'pers' => $personas
+//        ];
+        echo json_encode($personas);
+    }
+
     public function pruebaFaker() {
         $fak = \Faker\Factory::create('es_ES');
         //$fak = \Faker\Factory::create();
-        //echo 'Nombre: '.$fak->name . '<br>';
+        echo 'Nombre: ' . $fak->name . '<br>';
         echo 'Nombre: ' . $fak->firstName . '<br>';
         echo 'Apellidos: ' . $fak->lastName . '<br>';
-        //echo 'Dirección: '.$fak->address . '<br>';
-        //echo 'Texto al azar: '.$fak->text . '<br>';
+        echo 'Dirección: ' . $fak->address . '<br>';
+        echo 'Texto al azar: ' . $fak->text . '<br>';
         echo 'email: ' . $fak->email . '<br>';
-        //echo 'Ciudad: '.$fak->city . '<br>';
-        //echo 'Compañía: '.$fak->company . '<br>';
-        //echo 'Clave aleatoria: '.$fak->password . '<br>';
+        echo 'Ciudad: ' . $fak->city . '<br>';
+        echo 'Compañía: ' . $fak->company . '<br>';
+        echo 'Clave aleatoria: ' . $fak->password . '<br>';
         echo 'DNI: ' . $fak->dni . '<br>';
         echo "<a href='indice'>Volver</a>";
         //Dirección de interés para faker: https://code.tutsplus.com/es/tutorials/using-faker-to-generate-filler-data-for-automated-testing--cms-26824
