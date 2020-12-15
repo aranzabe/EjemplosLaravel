@@ -36,7 +36,8 @@ public class ConsumirRest {
             //URL url = new URL("http://localhost:8080/EjemploGF/app/ServicioDatos/2"); //--> Ejemplo 1
             //URL url = new URL("http://localhost:8080/EjemploGF/app/ServicioDatos");     //--> Ejemplo 2
             //URL url = new URL("http://localhost:8080/EjemploGF/app/ServicioDatos/otro?id=3"); //--> Ejemplo 3
-            URL url = new URL("http://localhost/EjemplosLaravel/ejemploBBDD/public/servicioWEB");
+            //URL url = new URL("http://localhost/EjemplosLaravel/ejemploBBDD/public/servicioWEB");
+            URL url = new URL("http://localhost/EjemplosLaravel/ejemploBBDD/public/servicioWEBdatosRuta/1A");
             
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
