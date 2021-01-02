@@ -12,4 +12,11 @@ class Persona extends Model
     protected $keyType = 'string';   //Indicamos que la clave no es entera.
     public $timestamps = false;   //Con esto Eloquent no maneja automáticamente created_at ni updated_at.
     
+    public function cochesAlquilados(){
+        //Con este método hacemos la relación de personas con coches alquilados. 
+        //Nos devuelve una colección a la que le podemos aplicar todos los métodos de las colecciones:
+        //https://laravel.com/docs/8.x/collections
+        return $this->hasMany('App\Propiedad','DNI','DNI');
+    }
+    
 }

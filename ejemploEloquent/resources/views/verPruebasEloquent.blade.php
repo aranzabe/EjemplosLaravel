@@ -63,16 +63,22 @@
         </style>
     </head>
     <body>
-        <a href="http://localhost/EjemplosLaravel/ejemploEloquent/public/verpersonas">Ver todas las personas.</a><br>
-        <a href="http://localhost/EjemplosLaravel/ejemploEloquent/public/probarFind">Probar find.</a><br>
-        <a href="http://localhost/EjemplosLaravel/ejemploEloquent/public/vermayores">Mayores de edad.</a><br>
-        <a href="http://localhost/EjemplosLaravel/ejemploEloquent/public/buscarpersona">Buscar a una persona.</a><br>
-        <a href="http://localhost/EjemplosLaravel/ejemploEloquent/public/verpersonasconcoche">Ver personas con coche alquilado.</a><br>
-        <a href="http://localhost/EjemplosLaravel/ejemploEloquent/public/probarMany">Ver personas con coche alquilado usando hasMany.</a><br>
-        <a href="http://localhost/EjemplosLaravel/ejemploEloquent/public/probarManyUnaPersona">Ver alquiler de una persona usando hasMany.</a><br>
-        <a href="http://localhost/EjemplosLaravel/ejemploEloquent/public/probarBelong">Probando belong.</a><br>
-        <a href="http://localhost/EjemplosLaravel/ejemploEloquent/public/insertarpersona">Insertar una nueva persona.</a><br>
+        <?php
         
-        
+        //foreach ($pers as $p) {
+        if($pers){
+            echo $pers->DNI . ' ';
+            echo $pers->Nombre . ' ';
+//            echo $p['Tfno'] . ' ';
+//            echo $p['edad'] . ' ';
+//            echo $p['Matricula'] . '<br>';
+        //}
+        }
+        else {
+            echo 'No encontrado';
+        }
+        ?>
+        <br>
+        <a href="volver">Volver</a>
     </body>
 </html>

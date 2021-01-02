@@ -20,25 +20,26 @@ class Propiedad extends Model {
     //protected $keyType = 'string';   //Indicamos que la clave no es entera. (Ya lo cumple).
     public $timestamps = false;   //Con esto Eloquent no maneja automáticamente created_at ni updated_at.
 
-    public function propiedad() { //1 a n desde Personas. Es decir aquellas personas que tiene 1 o varios coches en propiedad.
-        //Método para investigar.
-        return $this->belongsTo(Persona::class, 'DNI');
-        /*
-          /* Para investigar.
-          return $this->belongsToMany('App\Persona')
-          ->using('App\PropPersona') <-- Crear este modelo?
-          ->withPivot([
-          'DNI',
-          'Nombre',
-          'Marca',
-          'Modelo'
-          ]);
-         */
-    }
+    
 
     public function usuarios() {
-        //Método para investigar.
+        //Si las relaciones con las tablas fueran uno a uno sería igual pero con hasOne.
         return $this->hasMany(Persona::class, 'DNI', 'DNI');
+        //return $this->hasMany(Persona::class); --> Esto equivale a:     return $this->hasMany(Persona::class,'user_id','id');
+    }
+    
+    public function coches(){
+        return $this->hasMany(Coche::class, 'Matricula', 'Matricula');
+        //return $this->hasMany(Coche::class); //Si lo ponemos así el join lo haría usando los campos 'id' (que son los campos clave de Eloquent por defecto). 
+    }
+    
+    //hasMany se utiliza en una relación One To Many mientras que belongsToMany
+    public function usuariosBelong(){
+        return $this->belongsTo(Persona::class, 'DNI' , 'DNI');
+    }
+    
+    public function cochesBelong(){
+        return $this->belongsTo(Coche::class, 'Matricula', 'Matricula');
     }
 
 }
