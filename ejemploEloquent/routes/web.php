@@ -34,3 +34,15 @@ Route::get('vermayores','miControlador@vermayores');
 Route::get('volver', function () {
     return view('welcome');
 });
+
+Route::get('probarFind','miControlador@probarFind');
+
+Route::get('probarMany','miControlador@probarMany');
+
+Route::get('probarManyUnaPersona',function () {
+    return view('buscarPersonaCoche');
+});
+
+Route::post('validarbuscarpersonaCoche','miControlador@probarManyUnaPersona');
+
+Route::get('probarBelong','miControlador@probarBelong');
