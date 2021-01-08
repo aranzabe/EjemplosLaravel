@@ -13,7 +13,14 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                    Hola: {{ Auth::user()->name }}<br>
+                    Tus roles son: <br>
+                    <?php
+                    $rolesActuales = Auth::user()->rolesQueTienes(Auth::user()->id);
+                    foreach($rolesActuales as $rolAct){
+                        echo $rolAct['id'].' -> '.$rolAct['name'].'<br>';
+                    }
+                    ?>
                     {{ __('You are logged in!') }}
                 </div>
             </div>

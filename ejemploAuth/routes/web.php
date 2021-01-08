@@ -103,3 +103,22 @@ Auth::routes();
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+/*
+ * Autenticación básica.
+ * La autenticación HTTP básica proporciona una manera rápida de autenticar usuarios en tu aplicación sin configurar una página de «login» dedicada. 
+ * Para iniciar, adjunta el middleware auth.basic a tu ruta. El middleware auth.basic está incluido en el framework de Laravel, por lo que no hay 
+ * necesidad de definirlo:
+ */
+Route::get('autenticacionbasica', function () {
+    echo 'Autenticado';
+    //Auth::logout();
+})->middleware('auth.basic');
+
+
+/*
+ * Bibliografía:
+ * https://styde.net/laravel-6-doc-autenticacion/
+ * https://cvallejo.medium.com/autenticaci%C3%B3n-y-manejo-de-roles-de-usuarios-en-laravel-7-50aa79fa1bed
+ * https://laravel.com/docs/8.x/eloquent
+ */
