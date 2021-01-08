@@ -20,7 +20,12 @@ class HomeController extends Controller {
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index() {
+    public function index(Request $request) {
+        
+        //Con esto se logra que solo los usuarios con role de ‘user’ o ‘admin’ puedan ingresar en esa vista.
+        $request->user()->authorizeRoles(['user', 'admin']);
+        //Si no están autorizados con esos roles no llegarían aquí.
+        
         return view('home');
     }
 
