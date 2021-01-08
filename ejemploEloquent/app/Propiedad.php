@@ -33,7 +33,7 @@ class Propiedad extends Model {
         //return $this->hasMany(Coche::class); //Si lo ponemos así el join lo haría usando los campos 'id' (que son los campos clave de Eloquent por defecto). 
     }
     
-    //hasMany se utiliza en una relación One To Many mientras que belongsToMany
+    //hasMany se utiliza en una relación One To Many mientras que belongsToMany es para una de Many to Many.
     public function usuariosBelong(){
         return $this->belongsTo(Persona::class, 'DNI' , 'DNI');
     }
