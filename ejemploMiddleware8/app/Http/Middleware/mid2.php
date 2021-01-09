@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+
+class mid2 {
+
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function handle(Request $request, Closure $next) {
+        //if (\Session::get('rol') == 2)
+        if (1 == 1)
+            return $next($request);
+        else
+            abort(520);
+    }
+
+}
