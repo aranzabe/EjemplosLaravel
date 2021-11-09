@@ -1,23 +1,25 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class micontrol extends Controller {
 
     public function listar() {
         //************* Sin QueryBuilder ******************
-        //a) Select sencilla con un valor.
-        //$personas = \DB::select('select * from personas where DNI = ?', ['1A']);
+        // a) Select sencilla con un valor.
+        // $personas = \DB::select('select * from personas where DNI = ?', ['1A']);
         //b) Usando un parámetro con nombre.
-        //$personas = \DB::select('select * from personas where DNI = :dn', ['dn' => '2B']);
+        // $personas = \DB::select('select * from personas where DNI = :dn', ['dn' => '2B']);
         //c) Consulta de varias tablas.
-//         $quer = 'select * from personas, propiedades, coches'
-//          . ' where propiedades.DNI = personas.DNI '
-//          . 'AND propiedades.Matricula = coches.Matricula And personas.DNI = ?';
-//        //dd($quer);
-//        $personas = \DB::select($quer,['1A']);
+        // $quer = 'select * from personas, propiedades, coches'
+        //   . ' where propiedades.DNI = personas.DNI '
+        //   . 'AND propiedades.Matricula = coches.Matricula And personas.DNI = ?';
+        // //dd($quer);
+        // $personas = \DB::select($quer,['1A']);
         /*
          * Otros ejemplos sin QB:
          */
@@ -34,24 +36,24 @@ class micontrol extends Controller {
         //a) El equivalente de una select *.
         //$personas = \DB::table('personas')->get();
         //b) Select con condiciones
-//         $personas = \DB::table('personas')
-//          ->select('DNI', 'Nombre', 'Tfno', 'edad')
-//          ->where('DNI', '=', '3C')
-//          ->orderBy('edad', 'desc')
-//          ->get();
+        // $personas = \DB::table('personas')
+        //  ->select('DNI', 'Nombre', 'Tfno', 'edad')
+        //  ->where('DNI', '=', '3C')
+        //  ->orderBy('edad', 'desc')
+        //  ->get();
         //c) Selección con opciones AND y OR
-//         $personas = \DB::table('personas')
-//          ->select('DNI','Nombre','edad')
-//          ->where('edad','>=','30')
-//          ->where('edad','<=','35')
-//          ->orwhere('nombre','Groucho')
-//          ->orderBy('edad','desc')
-//          ->get();
+        // $personas = DB::table('personas')
+        //  ->select('DNI','Nombre','Tfno','edad')
+        //  ->whereBetween('edad', [35, 40])
+        //  ->orwhere('nombre','Laura')
+        //  ->orderBy('edad','desc')
+        //  ->get();
         //d) Selección haciendo join de varias tablas.
-        $personas = \DB::table('personas')
+        $personas = DB::table('personas')
                 ->join('propiedades', 'propiedades.DNI', '=', 'personas.DNI')
                 ->join('coches', 'coches.Matricula', '=', 'propiedades.Matricula')
                 ->select('personas.DNI', 'Nombre', 'edad', 'Marca', 'Modelo')
+                ->where('nombre','Nathan')
                 ->get();
 
 //        var_dump($personas);
@@ -78,18 +80,24 @@ class micontrol extends Controller {
         if ($req->has('dni')) {
             $dn = $req->get('dni');
             //$no = $req->get('nombre');
-            $personas = \DB::select('select * from personas where DNI = ?', [$dn]);
-            echo json_encode($personas);
-        } else {
-            $personas = \DB::table('personas')->get();
+            $personas = DB::select('select * from personas where DNI = ?', [$dn]);
             //echo json_encode($personas);
-            return response()->json($personas);
+            return response()->json($personas,200);
+        } else {
+            $personas = DB::table('personas')->get();
+            //echo json_encode($personas);
+            return response()->json($personas,200);
         }
     }
 
-    public function servicioWEBdatosRuta($dni) {
-        $personas = \DB::select('select * from personas where DNI = ?', [$dni]);
-        echo json_encode($personas);
+    public function servicioWEBdatosRuta($dni=null) {
+        if ($dni==null){
+            return response()->json("No hay datos",200);
+        }
+        else {
+            $personas = DB::select('select * from personas where DNI = ?', [$dni]);
+            return response()->json($personas,200);
+        }
     }
 
     public function servicioWEB() {
@@ -99,7 +107,7 @@ class micontrol extends Controller {
 //            ['num' => 4, 'texto' => "Laravel cuatro"]
 //        ];
         //header("HTTP/1.1 200 OK");
-        $personas = \DB::table('personas')->get();
+        $personas = DB::table('personas')->get();
 //        $datos = [
 //            'pers' => $personas
 //        ];
@@ -123,6 +131,10 @@ class micontrol extends Controller {
         //Dirección de interés para faker: https://code.tutsplus.com/es/tutorials/using-faker-to-generate-filler-data-for-automated-testing--cms-26824
     }
 
+
+    /*
+    Esto que siguen son métodos de ejemplo de una aplicación realizada por compañeros vuestros, a modo de ejemplos.
+    */
     public function actualizarAptiza() {
         $fak = \Faker\Factory::create('es_ES');
         $alumnos = \DB::table('alumno')->get();

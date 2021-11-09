@@ -19,12 +19,15 @@ Route::get('indice', function () {
     return view('welcome');
 });
 
-Route::get('servicioWEB','micontrol@servicioWEBdatos');
-Route::get('servicioWEBdatosRuta/{dni}', 'micontrol@servicioWEBdatosRuta');
+Route::any('servicioWEB','micontrol@servicioWEBdatos');
+Route::get('servicioWEBdatosRuta/{dni?}', 'micontrol@servicioWEBdatosRuta');
 
 Route::get('listar','micontrol@listar');
 
 Route::get('pruebafaker','micontrol@pruebaFaker');
+
+
+
 
 Route::get('aptizaAlumnos','micontrol@actualizarAptiza');
 
