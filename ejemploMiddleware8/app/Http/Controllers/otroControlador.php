@@ -13,8 +13,8 @@ class otroControlador extends Controller {
 //        $this->middleware('mid1');  
 //        $this->middleware(['mid1','mid2']);
 
-        $this->middleware('mid1')->only('unaAccion'); //De esta forma solo las funciones que pongamos en 'only' pasan el mid.
-//        $this->middleware('mid1')->except('unaAccion'); //De esta forma todas las funciones, antes de ejecutarse, deben pasar por el mid1 (salvo unaAccion).
+        $this->middleware(['mid1','mid2','mid3'])->only(['unaAccion','otraAccion']); //De esta forma solo las funciones que pongamos en 'only' pasan el mid.
+        //$this->middleware('mid1')->except('otroMas'); //De esta forma todas las funciones, antes de ejecutarse, deben pasar por el mid1 (salvo unaAccion).
     }
     
     public function unaAccion(){
@@ -26,4 +26,7 @@ class otroControlador extends Controller {
     }
     
 
+    public function otroMas(){
+        echo 'He entrado';
+    }
 }

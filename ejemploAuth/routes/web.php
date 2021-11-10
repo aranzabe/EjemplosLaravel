@@ -115,7 +115,7 @@ Route::get('autenticacionbasica', function () {
     //Auth::logout();
 })->middleware('auth.basic');
 
-Route::get('unaRuta',[App\Http\Controllers\miControlador::class,'index']);
+Route::get('unaRuta',[App\Http\Controllers\miControlador::class,'index'])->middleware(['auth','administradores']);
 Route::get('otraRuta',[App\Http\Controllers\miControlador::class,'otroIndex'])->middleware('auth');
 /*
  * Bibliografía:

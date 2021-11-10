@@ -7,11 +7,49 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller {
 
-    public function prueba(){
-        echo 'Hola';
+    function __construct() {
+        //$this->middleware('auth:api')->except('login');
+        //$this->middleware('client.credentials')->only(['index', 'show']);
+//        $this->middleware('auth:api')->except(['index', 'show']);
+    }
+
+    public function login(Request $request) {
+        if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
+//            $user = Auth::user();
+//            $success['token'] = $user->createToken('Personal Access Token')->accessToken;
+//            return response()->json(['success' => $success], $this->successStatus);
+            $user = $request->user();
+            $tokenResult = $user->createToken('Personal Access Token');
+            $token = $tokenResult->token;
+            $token->save();
+            return response()->json([
+                        'access_token' => $tokenResult->accessToken,
+                        'token_type' => 'Bearer'
+            ]);
+        } else {
+            return response()->json(['error' => 'Unauthorised'], 401);
+        }
+    }
+
+    public function logout(Request $request) {
+        $request->user()->token()->revoke();
+        return response()->json(['message' =>
+                    'Successfully logged out']);
     }
     
+    public function user(Request $request)
+    {
+        return response()->json($request->user());
+    }
+    
+    
+
+    public function prueba() {
+        echo 'Hola';
+    }
+
     public function index() {
+       // $user=$request->user("api");
         return Article::all();
     }
 
@@ -27,10 +65,19 @@ class ArticleController extends Controller {
         }
 
         return $articulo;
+        //return response()->json(['code' => 200, 'message' => 'Datos insertados: ' . $article], 200);
     }
 
     public function store(Request $request) {
         $article = Article::create($request->all());
+        
+//        $article = Article::create(['title' => $request->get('title'),
+//            'body' => $request->get('body')]);
+//        
+//        $ar = new Article();
+//        $ar->title = $request->get('title');
+//        $ar->body = $request->get('body');
+//        $ar->save();
 
         return response()->json(['code' => 201, 'message' => 'Datos insertados: ' . $article], 201);
         //return response()->json($article, 201);
@@ -69,7 +116,7 @@ class ArticleController extends Controller {
 
         // Se usa el código 204 No Content – [Sin Contenido] Respuesta a una petición exitosa que no devuelve un body (como una petición DELETE)
         // Este código 204 no devuelve body así que si queremos que se vea el mensaje tendríamos que usar un código de respuesta HTTP 200.
-        return response()->json(['code' => 204, 'message' => 'Artículo ' . $article . ' borrado.'], 200);
+        return response()->json(['code' => 200, 'message' => 'Artículo ' . $article . ' borrado.'], 200);
     }
 
 }
