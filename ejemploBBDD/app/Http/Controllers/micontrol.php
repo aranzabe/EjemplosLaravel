@@ -11,7 +11,11 @@ class micontrol extends Controller {
     public function listar() {
         //************* Sin QueryBuilder ******************
         // a) Select sencilla con un valor.
+<<<<<<< HEAD
          $personas = DB::select('select * from personas where DNI = ?', ['1A']);
+=======
+        // $personas = \DB::select('select * from personas where DNI = ?', ['1A']);
+>>>>>>> master
         //b) Usando un parámetro con nombre.
         // $personas = \DB::select('select * from personas where DNI = :dn', ['dn' => '2B']);
         //c) Consulta de varias tablas.
@@ -49,12 +53,21 @@ class micontrol extends Controller {
         //  ->orderBy('edad','desc')
         //  ->get();
         //d) Selección haciendo join de varias tablas.
+<<<<<<< HEAD
         // $personas = DB::table('personas')
         //         ->join('propiedades', 'propiedades.DNI', '=', 'personas.DNI')
         //         ->join('coches', 'coches.Matricula', '=', 'propiedades.Matricula')
         //         ->select('personas.DNI', 'Nombre', 'edad', 'Marca', 'Modelo')
         //         ->where('nombre','Nathan')
         //         ->get();
+=======
+        $personas = DB::table('personas')
+                ->join('propiedades', 'propiedades.DNI', '=', 'personas.DNI')
+                ->join('coches', 'coches.Matricula', '=', 'propiedades.Matricula')
+                ->select('personas.DNI', 'Nombre', 'edad', 'Marca', 'Modelo')
+                ->where('nombre','Nathan')
+                ->get();
+>>>>>>> master
 
 //        var_dump($personas);
         ///Otras opciones con QB:
