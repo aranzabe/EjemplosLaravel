@@ -9,20 +9,11 @@ Consumimos un servicio creado en Java Rest http://localhost:8080/EjemploGF/app/S
     </head>
     <body>
         <?php
-        //datos a enviar
-        //$data = array("a" => "a");
-        //url contra la que atacamos
-        //$ch = curl_init("http://localhost:8080/EjemploGF/app/ServicioDatos"); //Servicio creado en JSP.
-        //$ch = curl_init("http://localhost:8080/EjemploGF/app/ServicioDatos/2"); //Servicio creado en JSP.
-        //$ch = curl_init("http://localhost:8080/EjemploGF/app/ServicioDatos/otro?id=3");
-        //$ch = curl_init("http://localhost/DAW2_19_20/ServiciosWEB/ServicioPHP/"); //--> Este servicio lo sirve PHP.
-        //http://localhost/DAW2_19_20/ServiciosWEB/ServicioPHP/index.php
-        
-        
         
         //Haciendo una petición GET.
-        $ch = curl_init("http://localhost/EjemplosLaravel/ejemploBBDD/public/servicioWEB");
-        //$ch = curl_init("http://localhost/EjemplosLaravel/ejemploBBDD/public/servicioWEBdatosRuta/1A");
+        //$ch = curl_init("http://localhost/EjemplosLaravel/ServicioPHP");
+        //$ch = curl_init("http://localhost/EjemplosLaravel/ejemploBBDD/public/servicioWEB");
+        $ch = curl_init("http://localhost/EjemplosLaravel/ejemploBBDD/public/servicioWEBdatosRuta/2B");
         //$ch = curl_init("http://localhost/EjemplosLaravel/ejemploBBDD/public/servicioWEB?dni=4D");
         //a true, obtendremos una respuesta de la url, en otro caso, 
         //true si es correcto, false si no lo es
@@ -47,7 +38,7 @@ Consumimos un servicio creado en Java Rest http://localhost:8080/EjemploGF/app/S
         //datos a enviar
 //        $data = ["dni" => '1A'];
 //        //url contra la que atacamos
-//        $ch = curl_init("http://localhost/EjemplosLaravel/ejemploBBDD/public/servicioWEBPost/1A");
+//        $ch = curl_init("http://localhost/EjemplosLaravel/ejemploBBDD/public/servicioWEBPost/2B");
 //        //a true, obtendremos una respuesta de la url, en otro caso, 
 //        //true si es correcto, false si no lo es
 //        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -65,10 +56,10 @@ Consumimos un servicio creado en Java Rest http://localhost:8080/EjemploGF/app/S
             return false;
         } else {
             echo '<br>';
-            //var_dump($response);
+            var_dump($response);
             // Read JSON file
             //$readjson = file_get_contents('employees.json');
-            var_dump($response);
+            //var_dump($response);
             //Decode JSON
             $data = json_decode($response, true);
 
@@ -81,7 +72,7 @@ Consumimos un servicio creado en Java Rest http://localhost:8080/EjemploGF/app/S
 //                echo $emp['num'] .' '.$emp['texto']. "<br/>";
 //            }
 
-            echo "<br/><br/> Datos obtenidos del servicio WEB Laravel: <br/>";
+//            echo "<br/><br/> Datos obtenidos del servicio WEB Laravel: <br/>";
             foreach ($data as $cod => $emp) {
                 //echo $cod;
                 echo $emp['DNI'] . ' ' . $emp['Nombre'] . ' ' . $emp['Tfno'] . ' ' . $emp['edad'] . "<br/>";

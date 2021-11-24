@@ -18,13 +18,14 @@ class miControlador extends Controller
      * $this->middleware('admin')->except('otroIndex');
      */
     function __construct() {
-        //$this->middleware('auth');
+        $this->middleware('auth');
         //$this->middleware('auth')->only('index');
-        $this->middleware('auth')->except('otroIndex');
+        //$this->middleware('auth')->except('otroIndex');
     }
 
     function index(){
         echo 'Solo autenticados';
+        Role::all();
     }
     
     function otroIndex(){

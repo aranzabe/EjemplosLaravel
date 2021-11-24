@@ -25,4 +25,5 @@ class Role extends Model
      * 
      * php artisan make:migration create_role_user_table
      */
+    
 }
