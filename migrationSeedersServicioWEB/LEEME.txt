@@ -1,0 +1,14 @@
+La base de datos se puede importar del archivo: migSeedApi aunque con lanzar las instrucciones:
+
+Creando las tablas:
+php artisan migrate:refresh --path=database/migrations/2021_11_23_221654_create_personas.php
+php artisan migrate:refresh --path=database/migrations/2021_11_23_221654_create_comentarios.php
+
+Rellenándolas:
+php artisan db:seed --class=PersonaSeeder
+php artisan db:seed --class=ComentarioSeeder
+
+se rellenaría la bd (solo habría que crearla previamente).
+
+Para consumir el APIRest definido en el proyecto podemos usar Postman o el cliente escrito en PHP que tenemos en la carpeta 'ConsumirAPI'.
+

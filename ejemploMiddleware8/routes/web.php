@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\miControlador;
 /*
 
   Este ejemplo también contiene información de como incluir JS y CSS en Laravel.
@@ -20,7 +20,7 @@ Route::get('/', function () {
 //})->middleware('mid1');
 
 //b) Middleware a una ruta.
-Route::get('ejem', [App\Http\Controllers\miControlador::class,'formul'])->middleware(['mid1','mid2']);
+//Route::get('ejem', [miControlador::class,'formul'])->middleware(['mid1','mid2']);
 
 //c) Varios middleware a varias rutas.
 //Route::get('ejem', [App\Http\Controllers\miControlador::class,'formul'])->middleware(['mid1','mid2'])->name('ejemplo');
@@ -30,18 +30,18 @@ Route::get('validar', function () {
     return view('errors/503');
 });
 //d) Grupo de rutas. Administrador.
-Route::group(['prefix' => 'rutas', 'middleware' => ['mid1', 'mid2']], function() {
-
-    Route::get('ejem', [App\Http\Controllers\miControlador::class,'formul'])->name('ejem');
-
-    Route::get('ejem2', [App\Http\Controllers\miControlador::class,'otraPagina'])->name('ejem2');
-
-
-    Route::post('validar', [App\Http\Controllers\miControlador::class, 'valida']);
-    Route::get('validar', function () {
-        return view('errors/503');
-    });
-});
+//Route::group(['prefix' => 'rutas', 'middleware' => 'mid1'], function() {
+//
+//    Route::get('ejem', [App\Http\Controllers\miControlador::class,'formul'])->middleware('mid2')->name('ejem');
+//
+//    Route::get('ejem2', [App\Http\Controllers\miControlador::class,'otraPagina'])->name('ejem2');
+//
+//
+//    Route::post('validar', [App\Http\Controllers\miControlador::class, 'valida']);
+//    Route::get('validar', function () {
+//        return view('errors/503');
+//    });
+//});
 
 
 /*
@@ -102,3 +102,4 @@ class RouteServiceProvider extends ServiceProvider
  */
 Route::get('otraForma', [App\Http\Controllers\otroControlador::class,'unaAccion']);
 Route::get('otraForma2', [App\Http\Controllers\otroControlador::class,'otraAccion']);
+Route::get('otraForma3', [App\Http\Controllers\otroControlador::class,'otroMas']);

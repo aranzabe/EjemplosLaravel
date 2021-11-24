@@ -93,6 +93,15 @@ class miControlador extends Controller {
                     'edad' => $pers->edad];
             }
         }
+        
+//        $pers = Persona::with('cochesAlquilados')->get();
+//        if ($pers) {
+//                $vectorDatos[] = ['DNI' => $pe->DNI,
+//                    'Matricula' => $pe->Matricula,
+//                    'Nombre' => $pers->Nombre,
+//                    'Tfno' => $pers->Tfno,
+//                    'edad' => $pers->edad];
+//            }
         //dd($vectorDatos);
         //dd($pers->Nombre);
         //dd($p->propiedad);
@@ -109,6 +118,7 @@ class miControlador extends Controller {
      */
     public function probarMany() {
 //        //Opción A.
+//        //Destierro y latigazos.
 //        $coches = Propiedad::with('usuarios')->get();
 ////        dd($coches);  
 //        $conalquiler = [];
@@ -139,6 +149,7 @@ class miControlador extends Controller {
         //Opción C.
         $coches = Propiedad::with(['usuarios', 'coches'])->get();  //Le pasamos las llamadas a los métodos de los modelos (usuarios y coches).
 //        dd($coches);  
+        
         $conalquiler = [];
         foreach ($coches as $co) {
 //            dd($co->usuarios[0]->Nombre);
@@ -151,8 +162,7 @@ class miControlador extends Controller {
             ];
         }
 
-
-
+        
         $datos = [
             'pers' => $conalquiler
         ];
@@ -180,8 +190,8 @@ class miControlador extends Controller {
 //            }
 //        }
         //Opción B.
-        $coches = Propiedad::with(['usuarios', 'coches'])->where('DNI', $dni)->get();
-//        dd($coches);  
+        $coches = Propiedad::with(['usuarios'])->where('DNI', $dni)->get();
+        
         $conalquiler = [];
         foreach ($coches as $co) {
 //            dd($co->usuarios[0]->Nombre);

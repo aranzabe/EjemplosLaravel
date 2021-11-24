@@ -10,7 +10,7 @@ class UserSeeder extends Seeder
      * Run the database seeds.
      *
      * Para ejecutar: php artisan db:seed
-     * Para especificar un seeder concreo, por ejemplo este: php artisan db:seed --class=UserSeeder
+     * Para especificar un seeder concreto, por ejemplo este: php artisan db:seed --class=UserSeeder
      *
      * @return void
      */

@@ -131,9 +131,9 @@ Ver ejemplos de uso en esta página.
          */
 //-------------------------------------------------------------------------------------------
 //      Realizar un login y luego ya lo que sea: get, post, put, delete....
-        
-        /*
-        
+
+
+
         $data = [
             'email' => 'faranzabe@gmail.com',
             'password' => 12345678
@@ -143,68 +143,70 @@ Ver ejemplos de uso en esta página.
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
         $response = curl_exec($ch);
-        //var_dump($response);
-        curl_close($ch);
-        $respuesta = json_decode($response, true);
-        //var_dump($respuesta['code']);
-        if ($respuesta['code'] == 400) {
-            echo $respuesta['message'];
-        } else {
-            echo 'Login realizado'.'<br>';
-            //echo $respuesta['message']['access_token'];
-    
-            // use above token to make further api calls in this session or until the access token expires
-            //Haciendo una petición GET: para obtener un artículo concreto.
-            $ch = curl_init("http://localhost:8000/api/articles/9");
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
-            $header = array(
-                'Authorization: Bearer ' . $respuesta['message']['access_token']
-            );
+        var_dump($response);
+        if ($response) {
+            curl_close($ch);
+            $respuesta = json_decode($response, true);
+            //var_dump($respuesta['code']);
+            if ($respuesta['code'] == 400) {
+                echo $respuesta['message'];
+            } else {
+                echo 'Login realizado' . '<br>';
+                //echo $respuesta['message']['access_token'];
+                // use above token to make further api calls in this session or until the access token expires
+                //Haciendo una petición GET: para obtener un artículo concreto.
+                $ch = curl_init("http://localhost:8000/api/articles/18");
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+                $header = array(
+                    'Authorization: Bearer ' . $respuesta['message']['access_token']
+                );
 //            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 //                'Content-Type: application/json',
 //                'Authorization: Bearer ' . $token
 //            ));
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-            $result = curl_exec($ch);
-            curl_close($ch);
-            
-            $respuesta = json_decode($result, true);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+                $result = curl_exec($ch);
+                curl_close($ch);
+
+                $respuesta = json_decode($result, true);
 //            var_dump($respuesta);
-            if ($respuesta['code'] == 404) {
-                echo $respuesta['message'];
-            } else {
-                echo 'ID: ' . $respuesta['message']['id'] . '<br>';
-                echo 'Título: ' . $respuesta['message']['title'] . '<br>';
-                echo 'Cuerpo: ' . $respuesta['message']['body'] . '<br>';
+                if ($respuesta['code'] == 404) {
+                    echo $respuesta['message'];
+                } else {
+                    echo 'ID: ' . $respuesta['message']['id'] . '<br>';
+                    echo 'Título: ' . $respuesta['message']['title'] . '<br>';
+                    echo 'Cuerpo: ' . $respuesta['message']['body'] . '<br>';
+                }
             }
-           
-        }
-         
-        */
-        
-        
-        //---------------- Realizar un registro a través de la API -------------------
-        $data = [
-            'name' => 'Otro',
-            'email' => 'otro@gmail.com',
-            'password' => 12345678
-        ];
-        $ch = curl_init("http://localhost:8000/api/register");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-        $response = curl_exec($ch);
-        var_dump($response);
-        curl_close($ch);
-        $respuesta = json_decode($response, true);
-        var_dump($respuesta['code']);
-        if ($respuesta['code'] == 400) {
-            echo $respuesta['message'];
         } else {
-            echo 'Registro realizado'.'<br>';
-            echo $respuesta['message']['access_token'];
+            echo 'Servidor no encontrado <br>';
         }
+
+
+
+
+        //---------------- Realizar un registro a través de la API -------------------
+//        $data = [
+//            'name' => 'Otro',
+//            'email' => 'otro2@gmail.com',
+//            'password' => 12345678
+//        ];
+//        $ch = curl_init("http://localhost:8000/api/register");
+//        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+//        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+//        $response = curl_exec($ch);
+//        var_dump($response);
+//        curl_close($ch);
+//        $respuesta = json_decode($response, true);
+//        var_dump($respuesta['code']);
+//        if ($respuesta['code'] == 400) {
+//            echo $respuesta['message'];
+//        } else {
+//            echo 'Registro realizado'.'<br>';
+//            echo $respuesta['message']['access_token'];
+//        }
         ?>
     </body>
 </html>

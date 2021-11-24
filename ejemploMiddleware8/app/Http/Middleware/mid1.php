@@ -16,7 +16,7 @@ class mid1
      */
     public function handle(Request $request, Closure $next)
     {
-        if (1 == 2) {
+        if (1 == 1) {
             return $next($request);
         } else {
             abort(518);

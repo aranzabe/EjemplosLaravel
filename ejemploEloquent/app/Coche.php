@@ -12,6 +12,10 @@ class Coche extends Model {
     protected $keyType = 'string';   //Indicamos que la clave no es entera.
     public $timestamps = false;   //Con esto Eloquent no maneja automáticamente created_at ni updated_at.
 
+    protected $fillable = [
+        'Matricula', 'Marca', 'Modelo',
+    ];
+    
     //coches
     public function cochesAlquilados() {
         //Con este método hacemos la relación de personas con coches alquilados. 

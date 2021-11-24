@@ -63,12 +63,12 @@ CREATE TABLE `personas` (
 --
 
 INSERT INTO `personas` (`DNI`, `Nombre`, `Tfno`, `edad`) VALUES
-('19J', 'Victor', '1234', 36),
-('1A', 'Carlos', '1', 18),
-('2B', 'Laura', '2', 27),
-('3C', 'Nathan', '3', 36),
-('4D', 'Marina', '4', 45),
-('5E', 'Isabel', '5', 25),
+('19J', 'David', '1234', 36),
+('1A', 'Laura', '1', 18),
+('2B', 'Malena', '2', 27),
+('3C', 'Daniel', '3', 36),
+('4D', 'Alvaro', '4', 45),
+('5E', 'Nathan', '5', 25),
 ('6F', 'Rafa', '6', 30);
 
 -- --------------------------------------------------------

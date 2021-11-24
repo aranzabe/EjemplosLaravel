@@ -41,5 +41,10 @@ class Propiedad extends Model {
     public function cochesBelong(){
         return $this->belongsTo(Coche::class, 'Matricula', 'Matricula');
     }
+    
+    public function propietariosCoche($dni){
+        return $this->usuarios()->where('DNI', $dni)->get();
+    }
+   
 
 }
