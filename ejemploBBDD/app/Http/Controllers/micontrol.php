@@ -12,9 +12,15 @@ class micontrol extends Controller {
         //************* Sin QueryBuilder ******************
         // a) Select sencilla con un valor.
 <<<<<<< HEAD
+<<<<<<< HEAD
         // $personas = \DB::select('select * from personas where DNI = ?', ['1A']);
 =======
          $personas = DB::select('select * from personas where DNI = ?', ['1A']);
+=======
+         $personas = DB::select('select * from personas where DNI = ?', ['1A']);
+=======
+        // $personas = \DB::select('select * from personas where DNI = ?', ['1A']);
+>>>>>>> master
 >>>>>>> master
         //b) Usando un parámetro con nombre.
         // $personas = \DB::select('select * from personas where DNI = :dn', ['dn' => '2B']);
@@ -54,12 +60,7 @@ class micontrol extends Controller {
         //  ->get();
         //d) Selección haciendo join de varias tablas.
 <<<<<<< HEAD
-        $personas = DB::table('personas')
-                ->join('propiedades', 'propiedades.DNI', '=', 'personas.DNI')
-                ->join('coches', 'coches.Matricula', '=', 'propiedades.Matricula')
-                ->select('personas.DNI', 'Nombre', 'edad', 'Marca', 'Modelo')
-                ->where('nombre','Nathan')
-                ->get();
+<<<<<<< HEAD
 =======
         // $personas = DB::table('personas')
         //         ->join('propiedades', 'propiedades.DNI', '=', 'personas.DNI')
@@ -67,6 +68,24 @@ class micontrol extends Controller {
         //         ->select('personas.DNI', 'Nombre', 'edad', 'Marca', 'Modelo')
         //         ->where('nombre','Nathan')
         //         ->get();
+=======
+>>>>>>> master
+        $personas = DB::table('personas')
+                ->join('propiedades', 'propiedades.DNI', '=', 'personas.DNI')
+                ->join('coches', 'coches.Matricula', '=', 'propiedades.Matricula')
+                ->select('personas.DNI', 'Nombre', 'edad', 'Marca', 'Modelo')
+                ->where('nombre','Nathan')
+                ->get();
+<<<<<<< HEAD
+=======
+        // $personas = DB::table('personas')
+        //         ->join('propiedades', 'propiedades.DNI', '=', 'personas.DNI')
+        //         ->join('coches', 'coches.Matricula', '=', 'propiedades.Matricula')
+        //         ->select('personas.DNI', 'Nombre', 'edad', 'Marca', 'Modelo')
+        //         ->where('nombre','Nathan')
+        //         ->get();
+=======
+>>>>>>> master
 >>>>>>> master
 
 //        var_dump($personas);
