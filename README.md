@@ -7,9 +7,9 @@ https://aranzabe.mit-license.org/
 
 
 ## Ejemplos de clase.
-Recuerda que para que funcionen, una vez realizado el pull deberás realizar un: 
+Recuerda que para que funcionen, una vez realizado el pull deberás realizar un (dentro de la carpeta del proyecto): 
 
-    composer update (dentro de la carpeta del proyecto).
+    composer update 
 
 Tendremos que regenerar la key el proyecto con:
 
