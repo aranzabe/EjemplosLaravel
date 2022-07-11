@@ -11,7 +11,7 @@ Recuerda que para que funcionen, una vez realizado el pull deberás realizar un 
 
     composer update 
 
-Tendremos que regenerar la key el proyecto con:
+Tendremos que regenerar la key del proyecto con:
 
     cp .env.example .env           
     php artisan key:generate
